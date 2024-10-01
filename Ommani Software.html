@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Agent Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b3ff00;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #00ff73;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 50px 1000px rgb(0, 0, 0);
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+            font-family: sans-serif;
+            font-size: xx-large;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 20px;
+            color: #000000;
+            margin-bottom: 5px;
+            font-family: Serif;
+            font-weight: bolder;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 2px solid #000000;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .form-group-inline {
+            display: flex;
+            justify-content: space-between;
+        }
+        .form-group-inline .form-group {
+            flex: 1;
+            margin-right: 10px;
+        }
+        .form-group-inline .form-group:last-child {
+            margin-right: 0;
+        }
+        .form-group-inline input {
+            width: 100%;
+        }
+        .submit-btn {
+            background-color: #ff3f3f;
+            color: #000000;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bolder;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #ff0000;
+        }
+        @media screen and (max-width: 600px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            label,
+            input,
+            select,
+            textarea,
+            input[type="submit"] {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Ommani Tours Booking Form</h2>
+    <form id="travelForm" action="https://script.google.com/macros/s/AKfycbybETY26snPJoEBW0FtpAxKJRFdnv4ucPXv4PN4NcMbArPqhTn0EeSLagActL6VzWKt/exec" method="POST">
+        <br>
+        <div class="form-group">
+            <label for="client-name">Client Name</label>
+            <input type="text" id="client-name" name="name" placeholder="Enter client's name" required>
+        </div>
+        
+        <div class="form-group-inline">
+            <div class="form-group">
+                <label for="no-of-persons">No of Persons</label>
+                <input type="number" id="no-of-persons" name="persons" placeholder="Enter number of persons" required>
+            </div>
+            <div class="form-group">
+                <label for="no-of-days">No of Days</label>
+                <input type="number" id="no-of-days" name="days" placeholder="Enter number of days" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="hotel">Select Hotel Type</label>
+            <select id="hotel" name="hotel" required>
+                <option value="3star">3 Star</option>
+                <option value="4star">4 Star</option>
+                <option value="5star">5 Star</option>
+            </select>
+        </div>
+        
+        <div class="form-group-inline">
+            <div class="form-group">
+                <label for="per-person-cost">Per Person Cost</label>
+                <input type="number" id="per-person-cost" name="perPersonCost" placeholder="Enter cost per person" required>
+            </div>
+            <div class="form-group">
+                <label for="total-cost">Total Cost</label>
+                <input type="number" id="total-cost" name="totalCost" placeholder="Enter total cost" required>
+            </div>
+        </div>
+
+        <div class="form-group-inline">
+            <div class="form-group">
+                <label for="entry-date">Entry Date</label>
+                <input type="date" id="entry-date" name="entryDate" required>
+            </div>
+            <div class="form-group">
+                <label for="exit-date">Exit Date</label>
+                <input type="date" id="exit-date" name="exitDate" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <textarea id="remarks" name="remarks" rows="4" placeholder="Any additional information"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Submit Booking</button>
+    </form>
+</div>
+<script>
+    document.getElementById('travelForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this)
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert('Form submitted successfully.');
+        })
+        .catch(error => {
+            alert('Error submitting the form. Please try again.');
+        });
+    });
+</script>
+</body>
+</html>
